@@ -22,8 +22,11 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/info', (request, response) => {
-  response.send(`<p>Phonebook has info for ${persons.length} people<br/>${new Date(Date.now()).toString()}</p>`)
+app.get('/info', async (request, response) => {
+  let length
+  await Person.find({}).then(persons => length = persons.length)
+  response.send(`<p>Phonebook has info for ${length} people<br/>${new Date(Date.now()).toString()}</p>`)
+  
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
