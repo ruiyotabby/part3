@@ -25,7 +25,7 @@ app.get('/api/persons', (request, response) => {
 app.get('/info', async (request, response) => {
   let length
   await Person.find({}).then(persons => length = persons.length)
-  .catch(error => console.log(error))
+  .catch(error => next(error))
   response.send(`<p>Phonebook has info for ${length} people<br/>${new Date(Date.now()).toString()}</p>`)
   
 })
